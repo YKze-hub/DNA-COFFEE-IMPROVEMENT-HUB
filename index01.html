@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DNA Coffee Improvement Hub — Coffee Skills Classes in Bangkok</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --brown-950:#231409;
+    --brown-900:#2A1B12;
+    --brown-700:#4A3626;
+    --brown-400:#8A7562;
+    --cream-100:#FAF5EC;
+    --cream-200:#F3EADB;
+    --cream-300:#E9DCC6;
+    --blue:#4C5FE0;
+    --violet:#9163D9;
+    --amber:#E8A648;
+    --amber-dark:#C8862F;
+    --line: rgba(42,27,18,0.14);
+    --max-w: 1120px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream-100);
+    color:var(--brown-900);
+    font-family:'Sora', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    line-height:1.08;
+    letter-spacing:-0.01em;
+    color:var(--brown-950);
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:var(--max-w); margin:0 auto; padding:0 28px;}
+  ::selection{background:var(--amber); color:var(--brown-950);}
+
+  .gradient-text{
+    background:linear-gradient(100deg, var(--blue), var(--violet));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:13px 26px;
+    border-radius:999px;
+    font-family:'Sora', sans-serif;
+    font-weight:600;
+    font-size:15px;
+    border:1.5px solid transparent;
+    cursor:pointer;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{
+    background:var(--brown-950);
+    color:var(--cream-100);
+  }
+  .btn-primary:hover{box-shadow:0 10px 24px rgba(35,20,9,0.25);}
+  .btn-outline{
+    border-color:var(--brown-900);
+    color:var(--brown-900);
+    background:transparent;
+  }
+  .btn-outline:hover{background:var(--brown-900); color:var(--cream-100);}
+  .btn-amber{
+    background:var(--amber);
+    color:var(--brown-950);
+  }
+  .btn-amber:hover{box-shadow:0 10px 24px rgba(232,166,72,0.35);}
+
+  /* Nav */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(250,245,236,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid transparent;
+    transition:border-color .25s ease;
+  }
+  header.scrolled{border-bottom-color:var(--line);}
+  nav.wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:78px;
+  }
+  .brand{display:flex; align-items:center; gap:10px;}
+  .brand img{height:38px; width:38px;}
+  .brand span{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:16px;
+    letter-spacing:-0.01em;
+    line-height:1.15;
+  }
+  .brand small{display:block; font-family:'Sora',sans-serif; font-weight:500; font-size:10.5px; letter-spacing:0.04em; color:var(--brown-400);}
+  .nav-links{display:flex; gap:36px; align-items:center;}
+  .nav-links a{font-size:14.5px; font-weight:500; color:var(--brown-700);}
+  .nav-links a:hover{color:var(--brown-950);}
+  .nav-cta{display:flex; gap:10px;}
+  .menu-btn{display:none; background:none; border:none; cursor:pointer; padding:6px;}
+  .menu-btn span{display:block; width:22px; height:2px; background:var(--brown-950); margin:5px 0;}
+
+  /* Hero */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    padding:88px 0 64px;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr 0.8fr;
+    gap:40px;
+    align-items:center;
+    position:relative;
+    z-index:2;
+  }
+  .eyebrow-line{
+    display:flex; align-items:center; gap:10px;
+    font-size:13.5px; color:var(--brown-400); font-weight:500;
+    margin-bottom:22px;
+  }
+  .eyebrow-line .dot{width:6px; height:6px; border-radius:50%; background:var(--amber);}
+  .hero h1{
+    font-size:clamp(38px, 5.2vw, 64px);
+    max-width:640px;
+  }
+  .hero p.lead{
+    margin-top:22px;
+    font-size:18px;
+    color:var(--brown-700);
+    max-width:480px;
+  }
+  .hero-actions{display:flex; gap:14px; margin-top:34px; flex-wrap:wrap;}
+  .hero-visual{
+    position:relative;
+    aspect-ratio:1/1;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .hero-visual svg{width:100%; height:100%;}
+
+  .helix-bg{
+    position:absolute;
+    top:-10%; right:-14%;
+    width:60%;
+    opacity:0.5;
+    z-index:1;
+    pointer-events:none;
+  }
+
+  /* Marquee strip */
+  .strip{
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    background:var(--cream-200);
+    padding:16px 0;
+    overflow:hidden;
+  }
+  .strip-inner{
+    display:flex;
+    gap:56px;
+    white-space:nowrap;
+    animation:scroll-strip 28s linear infinite;
+    width:max-content;
+  }
+  .strip-inner span{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:15px;
+    color:var(--brown-400);
+  }
+  @keyframes scroll-strip{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+
+  section{padding:96px 0;}
+  .section-head{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:40px;
+    margin-bottom:56px;
+    align-items:end;
+  }
+  .section-head h2{font-size:clamp(28px, 3.4vw, 40px);}
+  .section-head p{color:var(--brown-700); font-size:16px; max-width:440px;}
+  .kicker{
+    font-size:13px; font-weight:600; color:var(--amber-dark);
+    text-transform:uppercase; letter-spacing:0.08em; margin-bottom:14px;
+  }
+
+  /* About */
+  .about{background:var(--brown-950); color:var(--cream-100);}
+  .about h2{color:var(--cream-100);}
+  .about .section-head p{color:rgba(250,245,236,0.72);}
+  .about-grid{
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:64px;
+    align-items:center;
+  }
+  .about-figure{
+    position:relative;
+    border-radius:18px;
+    overflow:hidden;
+    background:linear-gradient(155deg, rgba(76,95,224,0.25), rgba(145,99,217,0.15));
+    border:1px solid rgba(250,245,236,0.14);
+    padding:48px;
+    display:flex; align-items:center; justify-content:center;
+    aspect-ratio:4/5;
+  }
+  .about-figure img{width:60%;}
+  .about-body p{
+    font-size:17px;
+    color:rgba(250,245,236,0.82);
+    margin-bottom:20px;
+    max-width:520px;
+  }
+  .stat-row{
+    display:flex;
+    gap:48px;
+    margin-top:40px;
+    flex-wrap:wrap;
+  }
+  .stat-row div strong{
+    display:block;
+    font-family:'Fraunces', serif;
+    font-size:32px;
+    color:var(--amber);
+  }
+  .stat-row div span{font-size:13.5px; color:rgba(250,245,236,0.6);}
+
+  /* Curriculum / classes */
+  .curriculum{border-top:1px solid var(--line);}
+  .class-row{
+    display:grid;
+    grid-template-columns:64px 1.1fr 1.6fr auto;
+    gap:28px;
+    align-items:center;
+    padding:30px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .class-row:first-of-type{border-top:1px solid var(--line);}
+  .class-num{
+    font-family:'Fraunces', serif;
+    font-size:15px;
+    color:var(--brown-400);
+  }
+  .class-name{font-family:'Fraunces', serif; font-size:23px; font-weight:500;}
+  .class-meta{
+    display:flex; gap:10px; margin-top:8px; flex-wrap:wrap;
+  }
+  .tag{
+    font-size:12px; font-weight:600;
+    padding:4px 10px; border-radius:999px;
+    background:var(--cream-300);
+    color:var(--brown-700);
+  }
+  .class-desc{color:var(--brown-700); font-size:15px; max-width:460px;}
+  .class-cta{
+    font-size:14px; font-weight:600;
+    color:var(--brown-950);
+    white-space:nowrap;
+    display:flex; align-items:center; gap:6px;
+    padding:10px 18px;
+    border:1.5px solid var(--brown-900);
+    border-radius:999px;
+    transition:background .18s ease, color .18s ease;
+  }
+  .class-cta:hover{background:var(--brown-950); color:var(--cream-100);}
+
+  /* Approach */
+  .approach{background:var(--cream-200);}
+  .approach-list{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:0;
+  }
+  .approach-item{
+    padding:34px 30px;
+    border-left:1px solid var(--line);
+  }
+  .approach-item:first-child{border-left:none;}
+  .approach-item .num{
+    font-family:'Fraunces', serif;
+    color:var(--amber-dark);
+    font-size:14px;
+    margin-bottom:14px;
+  }
+  .approach-item h3{font-size:20px; margin-bottom:10px;}
+  .approach-item p{color:var(--brown-700); font-size:15px;}
+
+  /* Location */
+  .location-grid{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:48px;
+    align-items:stretch;
+  }
+  .location-info h2{margin-bottom:18px;}
+  .info-line{
+    display:flex; gap:14px; padding:16px 0;
+    border-top:1px solid var(--line);
+    font-size:15px;
+  }
+  .info-line:last-child{border-bottom:1px solid var(--line);}
+  .info-line .label{width:96px; flex-shrink:0; color:var(--brown-400); font-weight:600; font-size:13px; text-transform:uppercase; letter-spacing:0.05em; padding-top:2px;}
+  .map-frame{
+    border-radius:16px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    min-height:340px;
+  }
+  .map-frame iframe{width:100%; height:100%; min-height:340px; border:0; display:block;}
+
+  /* Contact / Booking */
+  .booking{
+    background:linear-gradient(120deg, var(--blue), var(--violet));
+    color:var(--cream-100);
+    border-radius:24px;
+    padding:64px;
+    margin:0 auto;
+    max-width:var(--max-w);
+    display:grid;
+    grid-template-columns:1.2fr 0.8fr;
+    gap:40px;
+    align-items:center;
+  }
+  .booking h2{color:var(--cream-100); font-size:clamp(28px,3.4vw,38px);}
+  .booking p{color:rgba(250,245,236,0.85); margin-top:14px; max-width:420px; font-size:16px;}
+  .booking-actions{display:flex; flex-direction:column; gap:12px;}
+  .booking-actions .btn{justify-content:center; width:100%;}
+  .btn-light{background:var(--cream-100); color:var(--brown-950);}
+  .btn-light:hover{box-shadow:0 10px 24px rgba(0,0,0,0.2);}
+  .btn-ghost{background:rgba(250,245,236,0.12); color:var(--cream-100); border-color:rgba(250,245,236,0.4);}
+  .btn-ghost:hover{background:rgba(250,245,236,0.22);}
+
+  /* Footer */
+  footer{padding:56px 0 40px; border-top:1px solid var(--line); margin-top:40px;}
+  .footer-grid{
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:24px;
+  }
+  .footer-brand{display:flex; align-items:center; gap:10px;}
+  .footer-brand img{height:30px; width:30px;}
+  .footer-brand span{font-family:'Fraunces', serif; font-weight:600; font-size:15px;}
+  .footer-links{display:flex; gap:28px;}
+  .footer-links a{font-size:14px; color:var(--brown-700);}
+  .footer-links a:hover{color:var(--brown-950);}
+  .footer-copy{font-size:13px; color:var(--brown-400); margin-top:28px;}
+
+  @media (max-width: 880px){
+    .nav-links, .nav-cta{display:none;}
+    .menu-btn{display:block;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{max-width:280px; margin:0 auto; order:-1;}
+    .section-head{grid-template-columns:1fr;}
+    .about-grid{grid-template-columns:1fr;}
+    .about-figure{max-width:280px; margin:0 auto;}
+    .class-row{grid-template-columns:1fr; gap:10px;}
+    .class-cta{justify-self:start;}
+    .approach-list{grid-template-columns:1fr;}
+    .approach-item{border-left:none; border-top:1px solid var(--line); padding-left:0;}
+    .approach-item:first-child{border-top:none;}
+    .location-grid{grid-template-columns:1fr;}
+    .booking{grid-template-columns:1fr; padding:40px 28px; border-radius:18px;}
+    .footer-grid{flex-direction:column; align-items:flex-start;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .strip-inner{animation:none;}
+  }
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <nav class="wrap">
+    <a href="#top" class="brand">
+      <img src="logo01.png" alt="DNA Coffee Improvement Hub logo">
+      <span>DNA Coffee<br><small>IMPROVEMENT HUB</small></span>
+    </a>
+    <div class="nav-links">
+      <a href="#classes">Classes</a>
+      <a href="#about">About</a>
+      <a href="#location">Location</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#contact" class="btn btn-primary">Book a class</a>
+    </div>
+    <button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <svg class="helix-bg" viewBox="0 0 400 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="helixGrad" x1="0" y1="0" x2="400" y2="700" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#4C5FE0"/>
+          <stop offset="1" stop-color="#9163D9"/>
+        </linearGradient>
+      </defs>
+      <path d="M40 20 C160 90, 40 160, 160 230 C280 300, 160 370, 40 440 C-80 510, 40 580, 160 650" stroke="url(#helixGrad)" stroke-width="6" stroke-linecap="round"/>
+      <path d="M360 20 C240 90, 360 160, 240 230 C120 300, 240 370, 360 440 C480 510, 360 580, 240 650" stroke="url(#helixGrad)" stroke-width="6" stroke-linecap="round"/>
+      <line x1="60" y1="55" x2="340" y2="55" stroke="url(#helixGrad)" stroke-width="4" opacity="0.5"/>
+      <line x1="130" y1="195" x2="270" y2="195" stroke="url(#helixGrad)" stroke-width="4" opacity="0.5"/>
+      <line x1="60" y1="335" x2="340" y2="335" stroke="url(#helixGrad)" stroke-width="4" opacity="0.5"/>
+      <line x1="130" y1="475" x2="270" y2="475" stroke="url(#helixGrad)" stroke-width="4" opacity="0.5"/>
+      <line x1="60" y1="615" x2="340" y2="615" stroke="url(#helixGrad)" stroke-width="4" opacity="0.5"/>
+    </svg>
+
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow-line"><span class="dot"></span>Coffee education, Bang Rak, Bangkok</div>
+        <h1>Coffee skills, <span class="gradient-text">broken down</span> and rebuilt properly.</h1>
+        <p class="lead">DNA Coffee Improvement Hub runs hands-on classes in brewing, roasting, latte art, cupping and sensory training — for baristas sharpening their craft and coffee lovers going deeper.</p>
+        <div class="hero-actions">
+          <a href="#classes" class="btn btn-primary">See all classes</a>
+          <a href="#contact" class="btn btn-outline">Ask a question</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="logo01.png" alt="DNA Coffee Improvement Hub — DNA helix and coffee bean logo" style="width:80%;">
+      </div>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="strip-inner">
+      <span>Basic Barista</span><span>Brewing</span><span>Latte Art Masterclass</span><span>Roasting</span><span>Sensory Skill</span><span>Coffee Cupping</span>
+      <span>Basic Barista</span><span>Brewing</span><span>Latte Art Masterclass</span><span>Roasting</span><span>Sensory Skill</span><span>Coffee Cupping</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="about-figure">
+          <img src="logo.png" alt="DNA Coffee Improvement Hub logo">
+        </div>
+        <div class="about-body">
+          <div class="kicker">Why DNA Coffee</div>
+          <h2>Coffee knowledge, taught the way it should be learned.</h2>
+          <p>We treat coffee skill the way it's actually built — in small, deliberate parts. Every class isolates one part of the craft, from the chemistry of extraction to the muscle memory of pouring latte art, so you leave with something you can repeat, not just something you watched.</p>
+          <p>Classes run in small groups with real equipment, real green beans, and real cupping tables — taught by people who work with coffee every day, not just teach it.</p>
+          <div class="stat-row">
+            <div><strong>6</strong><span>Classes offered</span></div>
+            <div><strong>Small</strong><span>Group sizes</span></div>
+            <div><strong>Hands-on</strong><span>Every session</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLASSES -->
+  <section class="curriculum" id="classes">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="kicker">The curriculum</div>
+          <h2>Six classes, one skill each.</h2>
+        </div>
+        <p>Pick a single class to focus on one skill, or work through the set to build a complete foundation — from bean to cup to palate.</p>
+      </div>
+
+      <div class="class-row">
+        <div class="class-num">01</div>
+        <div>
+          <div class="class-name">Basic Barista Class</div>
+          <div class="class-meta"><span class="tag">Beginner</span><span class="tag">Espresso</span></div>
+        </div>
+        <div class="class-desc">Espresso extraction fundamentals, dialing in a grinder, milk steaming and workflow — the foundation every other class builds on.</div>
+        <a href="#contact" class="class-cta">Ask about this class →</a>
+      </div>
+
+      <div class="class-row">
+        <div class="class-num">02</div>
+        <div>
+          <div class="class-name">Brewing Class</div>
+          <div class="class-meta"><span class="tag">All levels</span><span class="tag">Manual brew</span></div>
+        </div>
+        <div class="class-desc">Manual methods — V60, AeroPress, immersion — plus the extraction theory behind ratio, grind size and water temperature.</div>
+        <a href="#contact" class="class-cta">Ask about this class →</a>
+      </div>
+
+      <div class="class-row">
+        <div class="class-num">03</div>
+        <div>
+          <div class="class-name">Latte Art Masterclass</div>
+          <div class="class-meta"><span class="tag">Intermediate</span><span class="tag">Milk texturing</span></div>
+        </div>
+        <div class="class-desc">Microfoam texture, pour control and pattern work — hearts, rosettas and tulips — built through repetition, not shortcuts.</div>
+        <a href="#contact" class="class-cta">Ask about this class →</a>
+      </div>
+
+      <div class="class-row">
+        <div class="class-num">04</div>
+        <div>
+          <div class="class-name">Roasting Class</div>
+          <div class="class-meta"><span class="tag">All levels</span><span class="tag">Green bean</span></div>
+        </div>
+        <div class="class-desc">Green bean selection, heat application and roast profiling through first and second crack, tasted side by side as you go.</div>
+        <a href="#contact" class="class-cta">Ask about this class →</a>
+      </div>
+
+      <div class="class-row">
+        <div class="class-num">05</div>
+        <div>
+          <div class="class-name">Sensory Skill Class</div>
+          <div class="class-meta"><span class="tag">All levels</span><span class="tag">Palate training</span></div>
+        </div>
+        <div class="class-desc">Structured palate training to recognize acidity, body, sweetness and defects, and build a working flavor vocabulary.</div>
+        <a href="#contact" class="class-cta">Ask about this class →</a>
+      </div>
+
+      <div class="class-row">
+        <div class="class-num">06</div>
+        <div>
+          <div class="class-name">Coffee Cupping</div>
+          <div class="class-meta"><span class="tag">All levels</span><span class="tag">Evaluation</span></div>
+        </div>
+        <div class="class-desc">A guided cupping session across several origins and roasts, learning the scoring protocol used across the industry.</div>
+        <a href="#contact" class="class-cta">Ask about this class →</a>
+      </div>
+
+      <div class="class-row">
+        <div class="class-num">07</div>
+        <div>
+          <div class="class-name">Class Room Rental</div>
+          <div class="class-meta"><span class="tag">Up to 20 person</span><span class="tag">Rental</span></div>
+        </div>
+        <div class="class-desc">EA comfortable space for workshops, coffee classes, and private gatherings, with coffee equipment such as V60 drippers, coffee machines, and grinders available for rent.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section class="approach">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="kicker">How classes run</div>
+          <h2>What to expect on the day.</h2>
+        </div>
+      </div>
+      <div class="approach-list">
+        <div class="approach-item">
+          <div class="num">Group size</div>
+          <h3>Small, on purpose</h3>
+          <p>Classes stay small enough that every person gets hands-on time at the machine or the cupping table, not just a seat at the back.</p>
+        </div>
+        <div class="approach-item">
+          <div class="num">Materials</div>
+          <h3>Real equipment, real beans</h3>
+          <p>No simulations. You'll work with the same machines, grinders and green coffee used in professional cafés and roasteries.</p>
+        </div>
+        <div class="approach-item">
+          <div class="num">Booking</div>
+          <h3>Message us to reserve a spot</h3>
+          <p>Classes are booked directly through LINE or Facebook Messenger — message us your preferred class and date and we'll confirm availability.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION -->
+  <section id="location">
+    <div class="wrap">
+      <div class="location-grid">
+        <div class="location-info">
+          <div class="kicker">Find us</div>
+          <h2>In Bang Rak, Bangkok.</h2>
+          <div class="info-line">
+            <div class="label">Address</div>
+            <div>6, 8 Naret Rd, Si Phraya, Bang Rak, Bangkok 10500</div>
+          </div>
+          <div class="info-line">
+            <div class="label">Booking</div>
+            <div>Via Mail or Facebook Messenger — see contact section below.</div>
+          </div>
+          <div class="info-line">
+            <div class="label">Hours</div>
+            <div>Contact us for the current class schedule and availability.</div>
+          </div>
+        </div>
+        <div class="map-frame">
+          <iframe
+            src="https://www.google.com/maps?q=6+8+Naret+Rd,+Si+Phraya,+Bang+Rak,+Bangkok+10500&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Map to DNA Coffee Improvement Hub">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / BOOKING -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="booking">
+        <div>
+          <h2>Ready to book a class?</h2>
+          <p>Message us your preferred class and date on Mail or Facebook Messenger, and we'll confirm availability and pricing with you directly.</p>
+        </div>
+        <div class="booking-actions">
+          <a href="https://www.facebook.com/DNACoffeeImprovementHub/" target="_blank" rel="noopener" class="btn btn-light">Message on Facebook</a>
+          <a href="mailto:nanzarmable@gmail.com" target="_blank" rel="noopener" class="btn btn-ghost">Message on Mail</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="logo01.png" alt="DNA Coffee Improvement Hub logo">
+        <span>DNA Coffee Improvement Hub</span>
+      </div>
+      <div class="footer-links">
+        <a href="#classes">Classes</a>
+        <a href="#about">About</a>
+        <a href="#location">Location</a>
+        <a href="https://www.facebook.com/DNACoffeeImprovementHub/" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </div>
+    <div class="footer-copy">6, 8 Naret Rd, Si Phraya, Bang Rak, Bangkok 10500 · © DNA Coffee Improvement Hub</div>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 8);
+  });
+
+  const menuBtn = document.querySelector('.menu-btn');
+  const navLinks = document.querySelector('.nav-links');
+  menuBtn?.addEventListener('click', () => {
+    const open = navLinks.style.display === 'flex';
+    navLinks.style.display = open ? 'none' : 'flex';
+    navLinks.style.cssText += open ? '' : 'position:absolute; top:78px; left:0; right:0; flex-direction:column; background:var(--cream-100); padding:24px 28px; border-bottom:1px solid var(--line); gap:20px;';
+  });
+</script>
+
+</body>
+</html>
