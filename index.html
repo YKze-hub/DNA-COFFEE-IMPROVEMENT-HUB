@@ -51,7 +51,6 @@
     color:transparent;
   }
 
-  /* Buttons */
   .btn{
     display:inline-flex;
     align-items:center;
@@ -83,7 +82,6 @@
   }
   .btn-amber:hover{box-shadow:0 10px 24px rgba(232,166,72,0.35);}
 
-  /* Nav */
   header{
     position:sticky; top:0; z-index:50;
     background:rgba(250,245,236,0.85);
@@ -115,7 +113,6 @@
   .menu-btn{display:none; background:none; border:none; cursor:pointer; padding:6px;}
   .menu-btn span{display:block; width:22px; height:2px; background:var(--brown-950); margin:5px 0;}
 
-  /* Hero */
   .hero{
     position:relative;
     overflow:hidden;
@@ -162,7 +159,6 @@
     pointer-events:none;
   }
 
-  /* Marquee strip */
   .strip{
     border-top:1px solid var(--line);
     border-bottom:1px solid var(--line);
@@ -203,7 +199,6 @@
     text-transform:uppercase; letter-spacing:0.08em; margin-bottom:14px;
   }
 
-  /* About */
   .about{background:var(--brown-950); color:var(--cream-100);}
   .about h2{color:var(--cream-100);}
   .about .section-head p{color:rgba(250,245,236,0.72);}
@@ -213,17 +208,68 @@
     gap:64px;
     align-items:center;
   }
+
+  /* Photo slider (replaces the old static logo box) */
   .about-figure{
     position:relative;
     border-radius:18px;
     overflow:hidden;
     background:linear-gradient(155deg, rgba(76,95,224,0.25), rgba(145,99,217,0.15));
     border:1px solid rgba(250,245,236,0.14);
-    padding:48px;
-    display:flex; align-items:center; justify-content:center;
     aspect-ratio:4/5;
   }
-  .about-figure img{width:60%;}
+  .slider-track{
+    display:flex;
+    height:100%;
+    transition:transform .6s cubic-bezier(.65,0,.35,1);
+  }
+  .slider-slide{
+    flex:0 0 100%;
+    height:100%;
+  }
+  .slider-slide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+  .slider-arrow{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:38px; height:38px;
+    border-radius:50%;
+    background:rgba(35,20,9,0.55);
+    border:1px solid rgba(250,245,236,0.3);
+    color:var(--cream-100);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    font-size:16px;
+    z-index:3;
+    transition:background .18s ease;
+  }
+  .slider-arrow:hover{background:rgba(35,20,9,0.85);}
+  .slider-prev{left:14px;}
+  .slider-next{right:14px;}
+  .slider-dots{
+    position:absolute;
+    bottom:16px;
+    left:0; right:0;
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    z-index:3;
+  }
+  .slider-dot{
+    width:7px; height:7px;
+    border-radius:50%;
+    background:rgba(250,245,236,0.4);
+    border:none;
+    cursor:pointer;
+    padding:0;
+    transition:background .18s ease, transform .18s ease;
+  }
+  .slider-dot.active{background:var(--amber); transform:scale(1.25);}
+
   .about-body p{
     font-size:17px;
     color:rgba(250,245,236,0.82);
@@ -244,7 +290,6 @@
   }
   .stat-row div span{font-size:13.5px; color:rgba(250,245,236,0.6);}
 
-  /* Curriculum / classes */
   .curriculum{border-top:1px solid var(--line);}
   .class-row{
     display:grid;
@@ -283,7 +328,6 @@
   }
   .class-cta:hover{background:var(--brown-950); color:var(--cream-100);}
 
-  /* Approach */
   .approach{background:var(--cream-200);}
   .approach-list{
     display:grid;
@@ -304,7 +348,6 @@
   .approach-item h3{font-size:20px; margin-bottom:10px;}
   .approach-item p{color:var(--brown-700); font-size:15px;}
 
-  /* Location */
   .location-grid{
     display:grid;
     grid-template-columns:0.9fr 1.1fr;
@@ -327,7 +370,6 @@
   }
   .map-frame iframe{width:100%; height:100%; min-height:340px; border:0; display:block;}
 
-  /* Contact / Booking */
   .booking{
     background:linear-gradient(120deg, var(--blue), var(--violet));
     color:var(--cream-100);
@@ -349,7 +391,6 @@
   .btn-ghost{background:rgba(250,245,236,0.12); color:var(--cream-100); border-color:rgba(250,245,236,0.4);}
   .btn-ghost:hover{background:rgba(250,245,236,0.22);}
 
-  /* Footer */
   footer{padding:56px 0 40px; border-top:1px solid var(--line); margin-top:40px;}
   .footer-grid{
     display:flex; justify-content:space-between; align-items:center;
@@ -454,9 +495,22 @@
   <section class="about" id="about">
     <div class="wrap">
       <div class="about-grid">
-        <div class="about-figure">
-          <img src="logo.png" alt="DNA Coffee Improvement Hub logo">
+
+        <!-- PHOTO SLIDER: put 6 images named gallery-1.jpg ... gallery-6.jpg next to index.html -->
+        <div class="about-figure" id="aboutSlider">
+          <div class="slider-track" id="sliderTrack">
+            <div class="slider-slide"><img src="gallery-1.jpg" alt="DNA Coffee Improvement Hub photo 1"></div>
+            <div class="slider-slide"><img src="gallery-2.jpg" alt="DNA Coffee Improvement Hub photo 2"></div>
+            <div class="slider-slide"><img src="gallery-3.jpg" alt="DNA Coffee Improvement Hub photo 3"></div>
+            <div class="slider-slide"><img src="gallery-4.jpg" alt="DNA Coffee Improvement Hub photo 4"></div>
+            <div class="slider-slide"><img src="gallery-5.jpg" alt="DNA Coffee Improvement Hub photo 5"></div>
+            <div class="slider-slide"><img src="gallery-6.jpg" alt="DNA Coffee Improvement Hub photo 6"></div>
+          </div>
+          <button class="slider-arrow slider-prev" id="sliderPrev" aria-label="Previous photo">‹</button>
+          <button class="slider-arrow slider-next" id="sliderNext" aria-label="Next photo">›</button>
+          <div class="slider-dots" id="sliderDots"></div>
         </div>
+
         <div class="about-body">
           <div class="kicker">Why DNA Coffee</div>
           <h2>Coffee knowledge, taught the way it should be learned.</h2>
@@ -549,7 +603,8 @@
           <div class="class-name">Class Room Rental</div>
           <div class="class-meta"><span class="tag">Up to 20 person</span><span class="tag">Rental</span></div>
         </div>
-        <div class="class-desc">EA comfortable space for workshops, coffee classes, and private gatherings, with coffee equipment such as V60 drippers, coffee machines, and grinders available for rent.</div>
+        <div class="class-desc">A comfortable space for workshops, coffee classes, and private gatherings, with coffee equipment such as V60 drippers, coffee machines, and grinders available for rent.</div>
+        <a href="#contact" class="class-cta">Ask about this class →</a>
       </div>
 
     </div>
@@ -578,7 +633,7 @@
         <div class="approach-item">
           <div class="num">Booking</div>
           <h3>Message us to reserve a spot</h3>
-          <p>Classes are booked directly through LINE or Facebook Messenger — message us your preferred class and date and we'll confirm availability.</p>
+          <p>Classes are booked directly through Mail or Facebook Messenger — message us your preferred class and date and we'll confirm availability.</p>
         </div>
       </div>
     </div>
@@ -665,6 +720,45 @@
     navLinks.style.display = open ? 'none' : 'flex';
     navLinks.style.cssText += open ? '' : 'position:absolute; top:78px; left:0; right:0; flex-direction:column; background:var(--cream-100); padding:24px 28px; border-bottom:1px solid var(--line); gap:20px;';
   });
+
+  // ---- Photo slider ----
+  (function () {
+    const track = document.getElementById('sliderTrack');
+    const slides = track.querySelectorAll('.slider-slide');
+    const dotsWrap = document.getElementById('sliderDots');
+    const prevBtn = document.getElementById('sliderPrev');
+    const nextBtn = document.getElementById('sliderNext');
+    const container = document.getElementById('aboutSlider');
+    let index = 0;
+    let timer;
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Go to photo ' + (i + 1));
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    });
+    const dots = dotsWrap.querySelectorAll('.slider-dot');
+
+    function goTo(i) {
+      index = (i + slides.length) % slides.length;
+      track.style.transform = 'translateX(-' + (index * 100) + '%)';
+      dots.forEach((d, di) => d.classList.toggle('active', di === index));
+    }
+    function next() { goTo(index + 1); }
+    function prev() { goTo(index - 1); }
+
+    nextBtn.addEventListener('click', () => { next(); resetTimer(); });
+    prevBtn.addEventListener('click', () => { prev(); resetTimer(); });
+
+    function startTimer() { timer = setInterval(next, 4500); }
+    function resetTimer() { clearInterval(timer); startTimer(); }
+    startTimer();
+
+    container.addEventListener('mouseenter', () => clearInterval(timer));
+    container.addEventListener('mouseleave', startTimer);
+  })();
 </script>
 
 </body>
